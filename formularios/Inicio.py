@@ -34,17 +34,17 @@ def open_ventana_inicio():
     util_ventana.centrar_ventana(ventana, 890, 200)
 
     # etiquetas
-    etiqueta = tk.Label(ventana)
-    etiqueta.config(bg="#2a3138")
-    etiqueta.grid(row=0)
-    etiqueta1 = tk.Label(etiqueta, text="PRUEBA DE ESCRITURA")
+    fondo = tk.Frame(ventana)
+    fondo.config(bg="#2a3138")
+    fondo.pack(side=tk.TOP, fill="both")
+    etiqueta1 = tk.Label(fondo, text="PRUEBA DE ESCRITURA")
     etiqueta1.config(bg="#1f2229", fg="white",font=("Roboto",30), width=40, height=2)
-    etiqueta1.grid(row=0)
+    etiqueta1.pack(side=tk.LEFT, fill="both", expand=True)
 
     # button
     button = tk.Button(ventana, text="start", width=40, height=2, 
                        font=("Arial Black", 20), command = juego.open_window)
-    button.grid(row=1, column=0)
+    button.pack(side=tk.LEFT, fill="both", expand=True)
 
 
 
