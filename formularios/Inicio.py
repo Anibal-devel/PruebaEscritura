@@ -13,12 +13,13 @@ import tkinter as tk
 # centrado de ventana
 import utileria.util_ventana as util_ventana
 import formularios.juego as juego
+import main as mn
 
 
 # ---creando ventana---
 ventana = tk.Tk()
 
-def open_ventana_inicio():
+def open_ventana_inicio():    
     
 
     

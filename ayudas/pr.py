@@ -1,17 +1,12 @@
-import random  
+import tkinter as tk  
+from tkinter import ttk  
 
-frase = "Esta es una frase de ejemplo para seleccionar palabras."  
-palabras = frase.split()  # Divide la frase en palabras  
-numero_palabras = 3  # Número de palabras a seleccionar  
-palabras_seleccionadas = random.sample(palabras, numero_palabras)  
+root = tk.Tk()  
 
-print(palabras_seleccionadas)
+entrada = ttk.Entry(root)  
+entrada.pack()  
 
-texto = "Este es un texto de ejemplo."  
-contador_palabras = len(texto.split())  
-print(contador_palabras)
+# Hacer que el Entry esté activo al abrir la ventana  
+entrada.focus_set()  
 
-
-texto = "Esta es una cadena de texto con varias palabras"  
-palabras_limitadas = " ".join(texto.split()[:3])  
-print(palabras_limitadas)  # Salida: "Esta es una"
+root.mainloop()
