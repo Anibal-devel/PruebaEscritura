@@ -3,57 +3,56 @@ from tkinter import ttk
 import utileria.util_ventana as util_ventana
 import formularios.Inicio as inicio
 import random as rn
+import time as tm
 
 caracteres ="1234567890()-"
 list_caracteres= list(caracteres)
 
 def open_window():
+
+        
+    # al iniciar una nueva prueba de frase borramos label con frase y entry anterior
     def close():
         button1.destroy()
         entry.destroy()
-    try:
+    # al crear la nueva ventana borramos button start y label "prueba escritura"
+    try: # evitamos el crash al ya estar borrada anteriormente con (try)
         inicio.close_ventana_inicio()
     except:
         pass
     def comprobar(event):
+        '''comprueba que los datos de entrada ingresados en el entry por el 
+        usuario sean iguales a la frase propuesta a ecribir'''
         if entry.get() == frase:
            try:
                close()           
            except:
                pass
-           open_window()
-
-    
-
-    # creamos fondos
-    '''fondo_up = tk.Frame(inicio.ventana)
-    fondo_down = tk.Frame(inicio.ventana)
-    # ponemos color
-    fondo_up.config(bg="#1f2229")
-    fondo_down.config(bg="#2a3138")
-    # damos ubicacion
-    fondo_up.pack(side=tk.TOP, fill="both", expand=True)
-    fondo_down.pack(side=tk.TOP, fill="both", expand=True)'''
+           # tomamos tiempo final
+           end_time = tm.time()
+           resultado_time = end_time - start_time
+           imprimir_tiempo(resultado_time) 
 
     # imprimimos texto a escribir
-    frase = comenzar_prueba()
-
+    frase = crear_frase()
+    
+    # imprime en pantalla la frase creada
     button1 = tk.Label(inicio.fondo, text = frase)
     button1.config(bg="#1f2229", fg="white",font=("Roboto",30), width=40, height=2)
     button1.pack(side=tk.LEFT, fill="both", expand=False)
-
+    
+    # creamos entry donde escribira el usuario
     entry = ttk.Entry(inicio.ventana) # importar ttk + hacer focus_set() habilita que el entry al abrirse este seleccionado
     entry.config(font=("Segoe Ui Black",30))
-    
-    entry.pack(side="top",fill="both", expand=False, padx=200)       
+    entry.pack(side="top",fill="both", expand=False, padx=200)    
+    # tomamos el tiemo de inicio   
+    start_time = tm.time()
     entry.bind("<Return>", comprobar)
     entry.focus_set() # al abrir la ventana queda seleccionado
     
     #inicio.ventana.mainloop()
-
-    
-
-def comenzar_prueba():
+ 
+def crear_frase():
     frase_impresa = False
     while frase_impresa == False:
         # Abre el archivo y lee su contenido  
@@ -82,13 +81,24 @@ def comenzar_prueba():
                     frase_impresa = True
                     return frase_random
 
-def imprimir_frase(frase):
-    '''# quitamos ventana anterior
-    #ventana_juego.destroy()
-    # creamos una nueva
-    crear_ventana(frase)'''
+def imprimir_tiempo(resultado_time):
+    
+    def borrar_time_button():
+        button1.destroy()
+        button.destroy()
+        open_window()
 
+    # imprimimos frase en el label
+    button1 = tk.Label(inicio.fondo, text = f"Time: {round(resultado_time, 2)} segundos")
+    button1.config(bg="#1f2229", fg="white",font=("Roboto",30), width=40, height=2)
+    button1.pack(side=tk.LEFT, fill="both", expand=False)
 
+    # button start
+    button = tk.Button(inicio.ventana, text="start", width=40, height=2, 
+           font=("Arial Black", 20), command = borrar_time_button)
+    button.pack(side=tk.LEFT, fill="both", expand=True)
+
+    
     
 
 
